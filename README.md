@@ -1,7 +1,10 @@
 # hexo-moments-js
 通过js加载的轻量化朋友圈网页模板
 
-# 部署方式
+# 爬虫配置教程
+https://zfe.space/post/friend-link-circle.html
+
+# 页面部署方式
 修改api地址，
 在需要加载的页面添加moments.js，
 在需要加载的页面添加id为moments_container的div即可。
