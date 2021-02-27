@@ -119,7 +119,6 @@ let data_handle = (data, maxnumber) => {
         let Datedate = new Date(data[1][item][1]);
         if (Datedate > Datetody) {
             data[1].splice(item--, 1);
-            console.log('穿越了');
         }
     }
     let today_post = 0;
