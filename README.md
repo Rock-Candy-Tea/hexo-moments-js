@@ -3,7 +3,7 @@
 
 # 部署方式
 修改api地址，
-在需要加载的页面添加js，
+在需要加载的页面添加moments.js，
 在需要加载的页面添加id为moments_container的div即可。
 
 # js中的配置项
