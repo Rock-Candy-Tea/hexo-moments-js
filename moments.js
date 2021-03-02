@@ -4,6 +4,7 @@ let orign_data = []; //api请求所得到的源数据
 let maxnumber = 20; //页面展示文章数量
 let addnumber = 10; //每次加载增加的篇数
 let opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
+let nofollow = true //禁止搜索引擎抓取
 
 //将html放入指定id的div容器
 let append_div = (parent, text) => {
@@ -149,18 +150,27 @@ let data_handle = (data, maxnumber) => {
     html_item += '<div class="moments_chart"><span class="moments_post_info_title">活跃友链数:</span><span class="moments_post_info_number">' + unique_live_link + '个</span><br><span class="moments_post_info_title">当前库存:</span><span class="moments_post_info_number">' + listlenth + '篇</span><br></div>';
     html_item += '<div class="moments_chart"><span class="moments_post_info_title">今日更新:</span><span class="moments_post_info_number">' + today_post + '篇</span><br><span class="moments_post_info_title">最近更新:</span><span class="moments_post_info_number">' + last_update_time + '</span><br></div>';
     html_item += '</div>';
+
     for (let month_item of datalist_slice) {
         html_item += '<h2>' + month_item[0] + '</h2>';
         for (let post_item of month_item[1]) {
+            var rel = '';
+            if (nofollow && opentype == '_blank'){
+                rel = 'noopener nofollow';
+            }else if(nofollow){
+                rel = 'nofollow';
+            }else{
+                rel = '';
+            }
             html_item += ' <div class="moments-item">';
-            html_item += ' <a target="' + opentype + '" class="moments-item-img" href="' + post_item[2] + '" title="' + post_item[0] + '">';
+            html_item += ' <a target="' + opentype + '" class="moments-item-img" href="' + post_item[2] + '" title="' + post_item[0] + '"rel="'+ rel + '">';
             html_item += '<img onerror="this.onerror=null,this.src=&quot;https://cdn.jsdelivr.net/gh/Zfour/Butterfly-friend-poor-html/friendcircle/404.png&quot;"';
             html_item += ' src="' + post_item[4] + '"></a>';
             html_item += '<div class="moments-item-info"><div class="moments-item-time"><i class="far fa-user"></i>';
             html_item += '<span>' + post_item[3] + '</span>';
             html_item += ' <div class="moments_post_time"><i class="far fa-calendar-alt"></i>' +
                 '<time datetime="' + post_item[1] + '" title="' + post_item[1] + '">' + post_item[1] + '</time></div>';
-            html_item += `</div><a target="${opentype}" class="moments-item-title" href="${post_item[2]}" title="${post_item[0]}">${post_item[0]}</a></div>`;
+            html_item += `</div><a target="${opentype}" class="moments-item-title" href="${post_item[2]}" title="${post_item[0]}"rel="${rel}">${post_item[0]}</a></div>`;
             html_item += '</div>';
 
         }
