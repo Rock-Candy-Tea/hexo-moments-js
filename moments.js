@@ -185,7 +185,8 @@ let data_handle = (data, maxnumber) => {
 };
 
 //网络请求
-fetch(requests_url).then(
+if(document.getElementById('moments_container') ){
+    fetch(requests_url).then(
     data => data.json()
 ).then(
     data => {
@@ -193,6 +194,8 @@ fetch(requests_url).then(
         data_handle(orign_data, maxnumber)
     }
 )
+   }
+
 
 
 
