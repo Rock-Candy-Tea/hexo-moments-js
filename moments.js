@@ -1,3 +1,4 @@
+if(document.getElementById('moments_container')){
 let requests_url = 'https://hexo-circle-of-friends-api.vercel.app/api'; //api地址
 let moments_container = document.getElementById('moments_container') ; //div容器的id
 let orign_data = []; //api请求所得到的源数据
@@ -5,6 +6,7 @@ let maxnumber = 20; //页面展示文章数量
 let addnumber = 10; //每次加载增加的篇数
 let opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
 let nofollow = true //禁止搜索引擎抓取
+}
 
 //将html放入指定id的div容器
 let append_div = (parent, text) => {
