@@ -5,17 +5,7 @@ let orign_data = []; //api请求所得到的源数据
 let maxnumber = 20; //页面展示文章数量
 let addnumber = 10; //每次加载增加的篇数
 let opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
-let nofollow = true //禁止搜索引擎抓取
- fetch(requests_url).then(
-    data => data.json()
-).then(
-    data => {
-        orign_data = data;
-        data_handle(orign_data, maxnumber)
-    }
-)
-}
-
+let nofollow = true; //禁止搜索引擎抓取
 //将html放入指定id的div容器
 let append_div = (parent, text) => {
     if (typeof text === 'string') {
@@ -193,6 +183,17 @@ let data_handle = (data, maxnumber) => {
     html_item += '<style>.moments-item-info span{padding-left:.3rem;padding-right:.3rem}.moments_post_time time{padding-left:.3rem;cursor:default}.moments_post_info_title{font-weight:700}.moments_post_info_number{float:right}.moments_chart{align-items:flex-start;flex:1;width:100px;height:60px;margin:20px}@media screen and (max-width:500px){.info_user_pool{padding:10px;flex-direction:column;max-height:200px}.moments_chart{flex:0;width:100%;height:160px;margin:0}}.moments-item:before{border:0}@media screen and (min-width:500px){.moments_post_time{float:right}}.moments_load_button{-webkit-transition-duration:.4s;transition-duration:.4s;text-align:center;border:1px solid #ededed;border-radius:.3em;display:inline-block;background:transparent;color:#555;padding:.5em 1.25em}.moments_load_button:hover{color:#3090e4;border-color:#3090e4}.moments-item{position:relative;display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-moz-box-align:center;-o-box-align:center;-ms-flex-align:center;-webkit-align-items:center;align-items:center;margin:0 0 1rem .5rem;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;-ms-transition:all .2s ease-in-out;transition:all .2s ease-in-out;box-shadow:rgba(0,0,0,0.07) 0 2px 2px 0,rgba(0,0,0,0.1) 0 1px 5px 0;border-radius:2px}.moments-item-img{overflow:hidden;width:80px;height:80px}.moments-item-img img{max-width:100%;width:100%;height:100%;object-fit:cover}.moments-item-info{-webkit-box-flex:1;-moz-box-flex:1;-o-box-flex:1;box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;padding:0 .8rem}.moments-item-title{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;font-size:1.1em;-webkit-transition:all .3s;-moz-transition:all .3s;-o-transition:all .3s;-ms-transition:all .3s;transition:all .3s;-webkit-line-clamp:1}</style>'
     append_div(moments_container, html_item)
 };
+ fetch(requests_url).then(
+    data => data.json()
+).then(
+    data => {
+        orign_data = data;
+        data_handle(orign_data, maxnumber)
+    }
+)
+}
+
+
 
 
 
