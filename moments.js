@@ -113,7 +113,7 @@ let slice_month = (data) => {
 };
 
 //处理数据
-let data_handle = (data, maxnumber) => {
+let data_handle = (nofollow,data, maxnumber) => {
     let today = todaypost();
     let Datetody = new Date(today);
     for (let item = 0; item < data[1].length; item++) {
@@ -154,7 +154,7 @@ let data_handle = (data, maxnumber) => {
     for (let month_item of datalist_slice) {
         html_item += '<h2>' + month_item[0] + '</h2>';
         for (let post_item of month_item[1]) {
-            var rel = '';
+            let rel = '';
             if (nofollow && opentype == '_blank'){
                 rel = 'noopener nofollow';
             }else if(nofollow){
@@ -188,7 +188,7 @@ let data_handle = (data, maxnumber) => {
 ).then(
     data => {
         orign_data = data;
-        data_handle(orign_data, maxnumber)
+        data_handle(nofollow,orign_data, maxnumber)
     }
 )
 }
