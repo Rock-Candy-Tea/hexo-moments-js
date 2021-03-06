@@ -6,9 +6,8 @@ var opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
 var nofollow = true; //禁止搜索引擎抓取
 
 //添加加载动画
-var html_item = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>'
 let $dom = document.querySelector('#moments_container');
-$dom.innerHTML = html_item;
+$dom.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
 
 //处理数据
 
@@ -53,7 +52,7 @@ var data_handle = (nofollow,data, maxnumber) => {
       error += 1;
     }
   }
-  html_item = '<h2>统计信息</h2>';
+  var html_item = '<h2>统计信息</h2>';
   html_item += '<div id="info_user_pool" class="moments-item info_user_pool" style="">';
   html_item += '<div class="moments_chart"><span class="moments_post_info_title">当前友链数:</span><span class="moments_post_info_number">' + user_lenth + '个</span><br><span class="moments_post_info_title">失败数:</span><span class="moments_post_info_number">' + error + '个</span><br></div>';
   html_item += '<div class="moments_chart"><span class="moments_post_info_title">活跃友链数:</span><span class="moments_post_info_number">' + unique_live_link + '个</span><br><span class="moments_post_info_title">当前库存:</span><span class="moments_post_info_number">' + listlenth + '篇</span><br></div>';
@@ -93,7 +92,7 @@ var data_handle = (nofollow,data, maxnumber) => {
 
 
 
-  moments_container = document.getElementById('moments_container') ;
+  var moments_container = document.getElementById('moments_container') ;
   append_div(moments_container, html_item)
 };
 
