@@ -67,6 +67,8 @@ var data_handle = (nofollow,data, maxnumber) => {
         rel = 'noopener nofollow';
       }else if(nofollow){
         rel = 'nofollow';
+      }else if(opentype == '_blank'){
+        rel = 'noopener';
       }else{
         rel = '';
       }
