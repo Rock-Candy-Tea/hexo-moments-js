@@ -9,9 +9,9 @@ var nofollow = true; //禁止搜索引擎抓取
 
 if(document.getElementById('moments_container')){
   //添加加载动画
-var $dom = document.querySelector('#moments_container');
-$dom.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
-  
+  var loading_pic = document.getElementById('moments_container');
+  loading_pic.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
+
   fetch(requests_url).then(
       data => data.json()
   ).then(
@@ -100,114 +100,112 @@ var data_handle = (nofollow,data, maxnumber) => {
 
 var load_more_post = (orign_data, maxnumber) => {
   if(document.getElementById('moments_container')){
-  maxnumber = maxnumber + addnumber;
-  document.getElementById('moments_container') .innerHTML = "";
-  data_handle(nofollow,orign_data, maxnumber)}
+    maxnumber = maxnumber + addnumber;
+    document.getElementById('moments_container') .innerHTML = "";
+    data_handle(nofollow,orign_data, maxnumber)}
 };
 
 
 
-  //加载更多文章
+//加载更多文章
 //将html放入指定id的div容器
-  var append_div = (parent, text) => {
-    $dom.innerHTML = ``;
-    if (typeof text === 'string') {
-      var temp = document.createElement('div');
-      temp.innerHTML = text;
-      // 防止元素太多 进行提速
-      var frag = document.createDocumentFragment();
-      while (temp.firstChild) {
-        frag.appendChild(temp.firstChild);
-      }
-      parent.appendChild(frag);
-    } else {
-      parent.appendChild(text);
-    }
+var append_div = (parent, text) => {
+  if(document.getElementById('moments_container')){
+    loading_pic.innerHTML = ``;
   };
+  if (typeof text === 'string') {
+    var temp = document.createElement('div');
+    temp.innerHTML = text;
+    // 防止元素太多 进行提速
+    var frag = document.createDocumentFragment();
+    while (temp.firstChild) {
+      frag.appendChild(temp.firstChild);
+    }
+    parent.appendChild(frag);
+  } else {
+    parent.appendChild(text);
+  }
+};
 
 //去重
-  var unique = (arr) => {
-    return Array.from(new Set(arr))
-  };
+var unique = (arr) => {
+  return Array.from(new Set(arr))
+};
 
 //时区优化
-  var formatDate = (strDate) => {
-    try {
-      var date = new Date(Date.parse(strDate.replace(/-/g, "/")));
-      var gettimeoffset;
-      if (new Date().getTimezoneOffset()) {
-        gettimeoffset = new Date().getTimezoneOffset();
-      } else {
-        gettimeoffset = 8;
-      }
-      var timeoffset = gettimeoffset * 60 * 1000;
-      var len = date.getTime();
-      var date2 = new Date(len - timeoffset);
-      var sec = date2.getSeconds().toString();
-      var min = date2.getMinutes().toString();
-      if (sec.length === 1) {
-        sec = "0" + sec;
-      }
-      if (min.length === 1) {
-        min = "0" + min;
-      }
-      return date2.getFullYear().toString() + "/" + (date2.getMonth() + 1).toString() + "/" + date2.getDate().toString() + " " + date2.getHours().toString() + ":" + min + ":" + sec
-    } catch (e) {
-      return ""
+var formatDate = (strDate) => {
+  try {
+    var date = new Date(Date.parse(strDate.replace(/-/g, "/")));
+    var gettimeoffset;
+    if (new Date().getTimezoneOffset()) {
+      gettimeoffset = new Date().getTimezoneOffset();
+    } else {
+      gettimeoffset = 8;
     }
-  };
+    var timeoffset = gettimeoffset * 60 * 1000;
+    var len = date.getTime();
+    var date2 = new Date(len - timeoffset);
+    var sec = date2.getSeconds().toString();
+    var min = date2.getMinutes().toString();
+    if (sec.length === 1) {
+      sec = "0" + sec;
+    }
+    if (min.length === 1) {
+      min = "0" + min;
+    }
+    return date2.getFullYear().toString() + "/" + (date2.getMonth() + 1).toString() + "/" + date2.getDate().toString() + " " + date2.getHours().toString() + ":" + min + ":" + sec
+  } catch (e) {
+    return ""
+  }
+};
 
-  var timezoon = (datalist_slice) => {
-    var time = datalist_slice[0][1][0][5];
-    return formatDate(time)
-  };
+var timezoon = (datalist_slice) => {
+  var time = datalist_slice[0][1][0][5];
+  return formatDate(time)
+};
 
 //今日时间
-  var todaypost = () => {
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = (date.getMonth() + 1).toString();
-    var day = (date.getDate()).toString();
-    if (month.length === 1) {
-      month = "0" + month;
-    }
-    if (day.length === 1) {
-      day = "0" + day;
-    }
-    return year + "-" + month + "-" + day
-  };
+var todaypost = () => {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = (date.getMonth() + 1).toString();
+  var day = (date.getDate()).toString();
+  if (month.length === 1) {
+    month = "0" + month;
+  }
+  if (day.length === 1) {
+    day = "0" + day;
+  }
+  return year + "-" + month + "-" + day
+};
 
 //月份切片
-  var slice_month = (data) => {
-    var monthlist = [];
-    var datalist = [];
-    var data_slice = data;
-    for (var item in data_slice) {
-      data_slice[item].push(item);
-      if (data_slice[item][1].lenth !== 10) {
-        var list = data_slice[item][1].split('-');
-        if (list[1].length < 2) {
-          list[1] = "0" + list[1]
-        }
-        if (list[2].length < 2) {
-          list[2] = "0" + list[2]
-        }
-        data_slice[item][1] = list.join('-')
+var slice_month = (data) => {
+  var monthlist = [];
+  var datalist = [];
+  var data_slice = data;
+  for (var item in data_slice) {
+    data_slice[item].push(item);
+    if (data_slice[item][1].lenth !== 10) {
+      var list = data_slice[item][1].split('-');
+      if (list[1].length < 2) {
+        list[1] = "0" + list[1]
       }
-      var month = data_slice[item][1].slice(0, 7);
-      if (monthlist.indexOf(month) !== -1) {
-        datalist[monthlist.length - 1][1].push(data_slice[item])
-      } else {
-        monthlist.push(month);
-        datalist.push([month, [data_slice[item]]])
+      if (list[2].length < 2) {
+        list[2] = "0" + list[2]
       }
+      data_slice[item][1] = list.join('-')
     }
-    for (var mounthgroup of datalist) {
-      mounthgroup.push(mounthgroup[1][0][6]);
+    var month = data_slice[item][1].slice(0, 7);
+    if (monthlist.indexOf(month) !== -1) {
+      datalist[monthlist.length - 1][1].push(data_slice[item])
+    } else {
+      monthlist.push(month);
+      datalist.push([month, [data_slice[item]]])
     }
-    return datalist
-  };
-
-
-
-
+  }
+  for (var mounthgroup of datalist) {
+    mounthgroup.push(mounthgroup[1][0][6]);
+  }
+  return datalist
+};
