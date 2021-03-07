@@ -5,13 +5,13 @@ var addnumber = 10; //每次加载增加的篇数
 var opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
 var nofollow = true; //禁止搜索引擎抓取
 
-//添加加载动画
-var $dom = document.querySelector('#moments_container');
-$dom.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
-
 //处理数据
 
 if(document.getElementById('moments_container')){
+  //添加加载动画
+var $dom = document.querySelector('#moments_container');
+$dom.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
+  
   fetch(requests_url).then(
       data => data.json()
   ).then(
