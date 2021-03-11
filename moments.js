@@ -5,7 +5,7 @@ var addnumber = 10; //每次加载增加的篇数
 var opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
 var nofollow = true; //禁止搜索引擎抓取
 // 自定义loading图 例如: var loadingCutom = '<i class="fa fa-spinner fa-spin"></i>'
-// 自定义loading图 例如: var loadingCutom = '<img src=你的图片地址" alt="loading...">'
+// 自定义loading图 例如: var loadingCutom = '<img src="你的图片地址" alt="加载中...">'
 var loadingCutom = ''
 
 //处理数据
