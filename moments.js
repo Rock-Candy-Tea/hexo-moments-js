@@ -4,13 +4,22 @@ var maxnumber = 20; //页面展示文章数量
 var addnumber = 10; //每次加载增加的篇数
 var opentype = '_blank';  //'_blank'打开新标签,'_self'本窗口打开
 var nofollow = true; //禁止搜索引擎抓取
+// 自定义loading图 例如: var loadingCutom = '<i class="fa fa-spinner fa-spin"></i>'
+// 自定义loading图 例如: var loadingCutom = '<img src=你的图片地址" alt="loading...">'
+var loadingCutom = ''
 
 //处理数据
 
 if(document.getElementById('moments_container')){
   //添加加载动画
   var loading_pic = document.getElementById('moments_container');
-  loading_pic.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
+  
+  // 判断loadingCutom值是否为空
+  if(typeof loadingCutom == "undefined" || loadingCutom == null || loadingCutom === "") {
+    loading_pic.innerHTML = '<span id="moments_loading"><i class="fa fa-spinner fa-spin"></i></span>';
+  } else {
+    loading_pic.innerHTML = '<span id="moments_loading">'+loadingCutom+'</span>';
+  }
 
   fetch(requests_url).then(
       data => data.json()
